@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  photo_manager: ^3.0.0-dev.1
+  photo_manager: ^3.0.0-dev.2
   sliding_up_panel: ^2.0.0+1
-  image_picker: ^1.0.4
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
