@@ -85,7 +85,6 @@ class _MediaPickerState extends State<MediaPicker> {
         (result == PermissionState.limited && widget.allowLimitedPermission)) {
       return await PhotoManager.getAssetPathList(type: type);
     } else {
-      PhotoManager.openSetting();
       return [];
     }
   }
