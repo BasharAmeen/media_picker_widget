@@ -21,10 +21,12 @@ class MediaPicker extends StatefulWidget {
     this.scrollController,
     this.onPicking,
     this.headerBuilder,
+    this.allowLimitedPermission = true,
   });
 
   ///CallBack on image pick is done
   final ValueChanged<List<Media>> onPicked;
+  final bool allowLimitedPermission;
 
   ///Previously selected list of media in your app
   final List<Media> mediaList;
@@ -76,8 +78,11 @@ class _MediaPickerState extends State<MediaPicker> {
     }
 
     final result = await PhotoManager.requestPermissionExtend();
-    if (result == PermissionState.authorized ||
-        result == PermissionState.limited) {
+    if (!widget.allowLimitedPermission && result == PermissionState.limited) {
+      PhotoManager.openSetting();
+      return [];
+    } else if (result == PermissionState.authorized ||
+        (result == PermissionState.limited && widget.allowLimitedPermission)) {
       return await PhotoManager.getAssetPathList(type: type);
     } else {
       PhotoManager.openSetting();
